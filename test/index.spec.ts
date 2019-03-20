@@ -391,7 +391,7 @@ test('[csp] operator broadcast', async t => {
   source.broadcast(dest1, dest2, dest3);
 
   const m = msg();
-  await source.put(m);
+  source.put(m);
 
   t.equal(await dest1.take(), m, 'should resolve the correct value');
   t.equal(await dest2.take(), m, 'should resolve the correct value');

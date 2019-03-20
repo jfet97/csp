@@ -83,7 +83,7 @@ class ChannelWrapperImp<T> implements ChannelWrapper<T>{
         const outCh = new ChannelWrapperImp<S>();
 
         const mergeProcessFactory = async (source: ChannelWrapper<S>) => {
-            for await( const msg of source) {
+            for await(const msg of source) {
                 outCh.put(msg);
             }
         }

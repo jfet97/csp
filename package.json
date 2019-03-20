@@ -8,18 +8,20 @@
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -w -p tsconfig.build.json",
     "test": "nyc --check-coverage --lines 100 --functions 100 --branches 100 tape -r ts-node/register ./test/index.spec.ts",
-    "report": "nyc report --reporter=html"
-  },
-  "nyc": {
-    "extension": [
-      ".ts"
-    ],
-    "exclude": [
-      "test"
-    ]
+    "deploy": "gh-pages -d /docs/.vuepress/dist",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "CSP",
+    "communicating",
+    "sequential",
+    "processes",
+    "javascript",
+    "channel"
   ],
   "author": "Andrea Simone Costa <andrysimo1997@gmail.com>",
   "license": "MIT",
@@ -28,9 +30,11 @@
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "eslint": "^5.15.2",
-    "nyc": "^13.3.0",
+    "gh-pages": "^2.0.1",
     "tape": "^4.10.1",
     "ts-node": "^8.0.3",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.3.3333",
+    "vuepress": "^0.14.10",
+    "webpack-dev-middleware": "^3.6.0"
   }
 }
