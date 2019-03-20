@@ -148,7 +148,7 @@ async function process (inbound, outbound) => {
 
 ## Credits
 
-Thanks to (Joe Harlow)[https://twitter.com/someonedodgy] and his work on this topic.
+Thanks to [Joe Harlow](https://twitter.com/someonedodgy) and his work on this topic.
 
 ## Contributions
 
