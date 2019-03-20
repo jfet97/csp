@@ -1,27 +1,22 @@
-# @jfet/csp
+---
+title: Introduction
+---
 
-A library for Communicating Sequential Processes, built on top of `async/await` and the asynchronous iterable interface.
+# Introduction
 
-[![npm version](https://badge.fury.io/js/%40jfet%2Fcsp.svg)](https://badge.fury.io/js/%40jfet%2Fcsp)
+This is a library for Communicating Sequential Processes in JavaScript, built on top of `async/await` and the asynchronous iterable interface.
 
 ## Installation
 
-This library requires `async/await` and `for-await-of` support.
-
-```
+```sh
 $ npm install --save @jfet/csp
 ```
-
-## Docs
-
-You can find the documentation [here](https://jfet97.github.io/jfet-csp/).
-
 
 ## Example Usage
 
 Below is a trivial example of usage, that plays on the standard ping-pong example.
 
-```javascript
+```js
 const { Channel } = require('@jfet/csp');
 
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -48,13 +43,15 @@ createBat(wiff, waff); // create a bat that will waff wiffs
 waff.put(createBall());
 ```
 
-![ping pong](/assets/pingpong.gif?raw=true)
+With the following result:
 
+![pingpong](/jfet-csp/assets/pingpong.gif)
 
 ## Async Iteration Protocol
+
 Channels implement the async iterable interface, so you can transform the following illustrative code:
 
-```javascript
+```js
 async function process (inbound, outbound) {
   while (true) {
     const msg = await inbound.take();
@@ -66,7 +63,7 @@ async function process (inbound, outbound) {
 
 into a cleaner version, thanks to the powerful `for-await-of`:
 
-```javascript
+```js
 async function process (inbound, outbound) {
   for await(const msg of inbound) {
     // do stuff with msg
@@ -78,17 +75,3 @@ async function process (inbound, outbound) {
 ## Credits
 
 Thanks to [Joe Harlow](https://twitter.com/someonedodgy) for his work on this topic. If you are unfamiliar with CSP, I encourage you to see [his talk](https://pusher.com/sessions/meetup/the-js-roundabout/csp-in-js) where he describe a simpler version of this library as well.
-
-## Contributions
-
-Contributions are welcomed and appreciated!
-
-1. Fork this repository.
-2. Make your changes, documenting your new code with comments.
-3. Submit a pull request with a sane commit message.
-
-Feel free to get in touch if you have any questions.
-
-## License
-
-Please see the `LICENSE` file for more information.
