@@ -18,6 +18,8 @@ Below is a trivial example of usage, that plays on the standard ping-pong exampl
 
 ```js
 const { Channel } = require('@jfet/csp');
+// or...
+import { Channel } from '@jfet/csp';
 
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
