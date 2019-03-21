@@ -45,7 +45,7 @@ require("@jfet/csp/dist/operators/delay");
 import "@jfet/csp/dist/operators/delay";
 
 
-const source = new Channel<number>();
+const source = new Channel();
 const delayed = source.delay(3000);
 
 source.put(42);
@@ -57,7 +57,7 @@ const res = await delayed.take(); // will receive 42 after 3 seconds
 
 `source.filter(value => boolean)` -> `channel`
 
-The `filter` method takes a `predicate` function and returns a new channel. Each value inserted into the `source` will be passed to the `predicate`, and only those who make the function to return `true` will be inserted into the resulting `channel`. The others will be discarded.
+The `filter` method takes a `predicate` function and returns a new channel. Each value inserted into the `source` will be passed to the `predicate`, and only those who make the function to return `true` will be inserted into the returned `channel`. The others will be discarded.
 
 ```js
 require("@jfet/csp/dist/operators/filter");
