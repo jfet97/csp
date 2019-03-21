@@ -16,7 +16,7 @@ interface SelectableP<T> {
 
 class SelectableImp<T> implements Selectable<T> {
 
-    constructor(public sel: { [k: string]: Channel<T> } | Map<any, Channel<T>> | Set<Channel<T>> | Channel<T>[]) {
+    public constructor(public sel: { [k: string]: Channel<T> } | Map<any, Channel<T>> | Set<Channel<T>> | Channel<T>[]) {
     }
 
     /* we don't need it yet, but she is ready
@@ -42,7 +42,7 @@ class SelectableImp<T> implements Selectable<T> {
         return new SelectableImp<T>(res);
     }*/
 
-    mapToPromise(fn: (c: Channel<T>) => Promise<Channel<T>>): SelectableP<T> {
+    public mapToPromise(fn: (c: Channel<T>) => Promise<Channel<T>>): SelectableP<T> {
         let res;
         if (this.sel instanceof Map) {
             const selEntries = [...this.sel.entries()];
@@ -55,7 +55,7 @@ class SelectableImp<T> implements Selectable<T> {
             // plain js object
 
             // to erase as soon as typescript supports es2019 features: use Object.fromEntries instead
-            const fromEntries = function fromEntries(iterable: any) {
+            const fromEntries = function fromEntries(iterable: any): any {
                 return [...iterable]
                     .reduce((obj, { 0: key, 1: val }) => Object.assign(obj, { [key]: val }), {})
             }
@@ -64,7 +64,7 @@ class SelectableImp<T> implements Selectable<T> {
         return new SelectablePImp<T>(res);
     }
 
-    filter(predicate: (c: Channel<T>) => boolean): Selectable<T> {
+    public filter(predicate: (c: Channel<T>) => boolean): Selectable<T> {
         let res;
         if (this.sel instanceof Set) {
             const values = [...this.sel.values()];
@@ -82,7 +82,7 @@ class SelectableImp<T> implements Selectable<T> {
             // plain js object
 
             // to erase as soon as typescript supports es2019 features: use Object.fromEntries instead
-            const fromEntries = function fromEntries(iterable: any) {
+            const fromEntries = function fromEntries(iterable: any): any {
                 return [...iterable]
                     .reduce((obj, { 0: key, 1: val }) => Object.assign(obj, { [key]: val }), {})
             }
@@ -92,7 +92,7 @@ class SelectableImp<T> implements Selectable<T> {
         return new SelectableImp<T>(res);
     }
 
-    revertToArray(): Channel<T>[] {
+    public revertToArray(): Channel<T>[] {
         let res;
         if ((this.sel instanceof Set) || (this.sel instanceof Map) || (Array.isArray(this.sel))) {
             res = [...this.sel.values()];
@@ -103,7 +103,7 @@ class SelectableImp<T> implements Selectable<T> {
         return (res as Channel<T>[]);
     }
 
-    keyOf(searchedCh: Channel<T>): any {
+    public keyOf(searchedCh: Channel<T>): any {
         let res;
         if (this.sel instanceof Map) {
             const selEntries = [...this.sel.entries()];
@@ -122,17 +122,13 @@ class SelectableImp<T> implements Selectable<T> {
         return res;
     }
 
-    
+
 }
 
 class SelectablePImp<T> implements SelectableP<T> {
-    constructor(public sel: { [k: string]: Promise<Channel<T>> }
-        | Map<any, Promise<Channel<T>>>
-        | Set<Promise<Channel<T>>>
-        | Promise<Channel<T>>[]) {
-    }
+    public constructor(public sel: { [k: string]: Promise<Channel<T>> } | Map<any, Promise<Channel<T>>> | Set<Promise<Channel<T>>> | Promise<Channel<T>>[]) { }
 
-    revertToArray(): Promise<Channel<T>>[] {
+    public revertToArray(): Promise<Channel<T>>[] {
         let res;
         if ((this.sel instanceof Set) || (this.sel instanceof Map) || (Array.isArray(this.sel))) {
             res = [...this.sel.values()];

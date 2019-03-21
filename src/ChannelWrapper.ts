@@ -14,36 +14,36 @@ interface ChannelWrapper<T> {
 class ChannelWrapperImp<T> implements ChannelWrapper<T>{
     private __ch__: Channel<T>;
 
-    getInnerChannel(): Channel<T> {
+    public getInnerChannel(): Channel<T> {
         return this.__ch__;
     }
 
-    constructor(ch: ChannelImp<T> = new ChannelImp<T>()) {
+    public constructor(ch: ChannelImp<T> = new ChannelImp<T>()) {
         this.__ch__ = ch;
     }
 
-    put(msg: T): Promise<void> {
+    public put(msg: T): Promise<void> {
         return this.__ch__.put(msg);
     }
 
-    take(): Promise<T> {
+    public take(): Promise<T> {
         return this.__ch__.take();
     }
 
-    drain(): Promise<T[]> {
+    public drain(): Promise<T[]> {
         return this.__ch__.drain();
     }
 
-    async *[Symbol.asyncIterator]() {
+    public async *[Symbol.asyncIterator](): AsyncIterableIterator<T> {
         yield* this.__ch__;
     }
 
-    static alts<S>(...chs: ChannelWrapper<S>[]): Promise<S> {
+    public static alts<S>(...chs: ChannelWrapper<S>[]): Promise<S> {
         const channels = chs.map(ch => ch.getInnerChannel());
         return alts<S>(...channels);
     }
 
-    static async select<S>(sel: { [k: string]: ChannelWrapper<S> } | Map<any, ChannelWrapper<S>> | Set<ChannelWrapper<S>> | ChannelWrapper<S>[]): Promise<[any, S]> {
+    public static async select<S>(sel: { [k: string]: ChannelWrapper<S> } | Map<any, ChannelWrapper<S>> | Set<ChannelWrapper<S>> | ChannelWrapper<S>[]): Promise<[any, S]> {
         // convert ChannelWrapper<S> into Channel<S>
         // because Selectable works only with the latterone
         let res;
@@ -59,7 +59,7 @@ class ChannelWrapperImp<T> implements ChannelWrapper<T>{
             // plain js object
 
             // to erase as soon as typescript supports es2019 features: use Object.fromEntries instead
-            const fromEntries = function fromEntries(iterable: any) {
+            const fromEntries = function fromEntries(iterable: any): any {
                 return [...iterable]
                     .reduce((obj, { 0: key, 1: val }) => Object.assign(obj, { [key]: val }), {})
             }
@@ -73,22 +73,23 @@ class ChannelWrapperImp<T> implements ChannelWrapper<T>{
             // selectRes[0] contains an instance of Channel. We need the initial instance of ChannelWrapper
             // that wraps the winner instance of Channel
             selectRes[0] = [...sel.values()].find((value) => value.getInnerChannel() === selectRes[0])
-        } 
+        }
         return selectRes;
     }
 
     // as soon as a value is available from one of the input channels, put it immediately into the output channel
-    static merge<S>(...chs: ChannelWrapper<S>[]): ChannelWrapper<S> {
-        
+    public static merge<S>(...chs: ChannelWrapper<S>[]): ChannelWrapper<S> {
+
         const outCh = new ChannelWrapperImp<S>();
 
-        const mergeProcessFactory = async (source: ChannelWrapper<S>) => {
-            for await(const msg of source) {
+        const mergeProcessFactory = async (source: ChannelWrapper<S>): Promise<void> => {
+            for await (const msg of source) {
                 outCh.put(msg);
             }
+            return;
         }
 
-        for(const ch of chs) {
+        for (const ch of chs) {
             mergeProcessFactory(ch);
         }
 
@@ -97,14 +98,15 @@ class ChannelWrapperImp<T> implements ChannelWrapper<T>{
 
     // before request the next value from one of the input channels, each process will wait the take operation
     // that will be (eventually) performed on the just inserted message
-    static mergeDelayed<S>(...chs: ChannelWrapper<S>[]): ChannelWrapper<S> {
+    public static mergeDelayed<S>(...chs: ChannelWrapper<S>[]): ChannelWrapper<S> {
 
         const outCh = new ChannelWrapperImp<S>();
 
-        const mergeProcessFactory = async (source: ChannelWrapper<S>) => {
+        const mergeProcessFactory = async (source: ChannelWrapper<S>): Promise<void> => {
             for await (const msg of source) {
                 await outCh.put(msg);
             }
+            return;
         }
 
         for (const ch of chs) {

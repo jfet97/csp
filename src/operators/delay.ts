@@ -1,8 +1,8 @@
 import { ChannelWrapper, ChannelWrapperImp } from '../ChannelWrapper';
 
-const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const timeout = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
-function delay<T>(this: ChannelWrapper<T>, ms :number): ChannelWrapper<T> {
+function delay<T>(this: ChannelWrapper<T>, ms: number): ChannelWrapper<T> {
     const outCh = new ChannelWrapperImp<T>();
 
     // start the async process that will delay messages coming from the input channel (this)

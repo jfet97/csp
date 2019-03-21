@@ -29,25 +29,28 @@ interface Channel<T> {
 }
 
 class ChannelImp<T> implements Channel<T> {
-    [messages]: Array<T>;
-    [putters]: Array<(() => void)>;
-    [takers]: Array<((msg: T) => void)>;
-    [racers]: Array<((ch: Channel<T>) => void)>;
 
-    constructor() {
+
+
+    public [messages]: T[];
+    public [putters]: (() => void)[];
+    public [takers]: ((msg: T) => void)[];
+    public [racers]: ((ch: Channel<T>) => void)[];
+
+    public constructor() {
         this[messages] = [];
         this[putters] = [];
         this[takers] = [];
         this[racers] = [];
     }
 
-    async *[Symbol.asyncIterator]() {
+    public async *[Symbol.asyncIterator](): AsyncIterableIterator<T> {
         while (true) {
             yield await this.take();
         }
     }
 
-    put(msg: T): Promise<void> {
+    public put(msg: T): Promise<void> {
         return new Promise(resolve => {
             this.prependMessage(msg);
             this.waitATakerOrARacer(resolve);
@@ -67,7 +70,7 @@ class ChannelImp<T> implements Channel<T> {
         });
     }
 
-    take(): Promise<T> {
+    public take(): Promise<T> {
         return new Promise(resolve => {
             this.waitAPutter(resolve);
 
@@ -80,7 +83,7 @@ class ChannelImp<T> implements Channel<T> {
         });
     }
 
-    drain(): Promise<T[]> {
+    public drain(): Promise<T[]> {
         const msgs = [];
         while (this.areThereMessages()) {
             msgs.push(this.take());
@@ -88,7 +91,7 @@ class ChannelImp<T> implements Channel<T> {
         return Promise.all(msgs);
     }
 
-    race(): Promise<Channel<T>> {
+    public race(): Promise<Channel<T>> {
         return new Promise(resolve => {
             this.waitTheChannel(resolve);
 
@@ -99,45 +102,45 @@ class ChannelImp<T> implements Channel<T> {
         });
     }
 
-    prependMessage(msg: T): void {
+    public prependMessage(msg: T): void {
         this[messages].unshift(msg);
     }
 
-    waitATakerOrARacer(resolve: () => void): void {
+    public waitATakerOrARacer(resolve: () => void): void {
         this[putters].unshift(resolve);
     }
-    isThereAlreadyAPendingTaker(): boolean {
+    public isThereAlreadyAPendingTaker(): boolean {
         return !!this[takers].length;
     }
-    unwaitOldestPutter(): void {
+    public unwaitOldestPutter(): void {
         const resolve = this[putters].pop()
         resolve();
     }
-    retrieveOldestMessage(): T {
+    public retrieveOldestMessage(): T {
         return this[messages].pop();
     }
-    retrieveOldestTaker(): ((msg: T) => void) {
+    public retrieveOldestTaker(): ((msg: T) => void) {
         return this[takers].pop();
     }
-    waitAPutter(resolve: (msg: T) => void): void {
+    public waitAPutter(resolve: (msg: T) => void): void {
         this[takers].unshift(resolve);
     }
-    isThereAlreadyAPendingPutter(): boolean {
+    public isThereAlreadyAPendingPutter(): boolean {
         return !!this[putters].length;
     }
-    waitTheChannel(resolve: (ch: Channel<T>) => void): void {
+    public waitTheChannel(resolve: (ch: Channel<T>) => void): void {
         this[racers].unshift(resolve);
     }
-    retrieveOldestRacer(): ((ch: Channel<T>) => void) {
+    public retrieveOldestRacer(): ((ch: Channel<T>) => void) {
         return this[racers].pop();
     }
-    isThereAPendingRacer(): boolean {
+    public isThereAPendingRacer(): boolean {
         return !!this[racers].length;
     }
-    areThereMessages(): boolean {
+    public areThereMessages(): boolean {
         return !!this[messages].length;
     }
-    fulfillTheRacer(racer: (ch: Channel<T>) => void): void {
+    public fulfillTheRacer(racer: (ch: Channel<T>) => void): void {
         racer(this);
     }
 }
