@@ -50,7 +50,7 @@ const delayed = source.delay(3000);
 
 source.put(42);
 
-const res = await delayed.take(); // 
+const res = await delayed.take(); // will receive 42 after 3 seconds
 ```
 
 ### filter
