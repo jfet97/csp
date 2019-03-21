@@ -7,7 +7,7 @@
     <meta name="description" content="A js library for Communicating Sequential Processes">
     
     
-    <link rel="preload" href="/jfet-csp/assets/css/0.styles.87c5a639.css" as="style"><link rel="preload" href="/jfet-csp/assets/js/app.062d9a23.js" as="script"><link rel="preload" href="/jfet-csp/assets/js/6.cd003ada.js" as="script"><link rel="prefetch" href="/jfet-csp/assets/js/2.d8f505d4.js"><link rel="prefetch" href="/jfet-csp/assets/js/3.2adf9a6a.js"><link rel="prefetch" href="/jfet-csp/assets/js/4.8479f750.js"><link rel="prefetch" href="/jfet-csp/assets/js/5.ba27b9b6.js"><link rel="prefetch" href="/jfet-csp/assets/js/7.d71211a0.js">
+    <link rel="preload" href="/jfet-csp/assets/css/0.styles.87c5a639.css" as="style"><link rel="preload" href="/jfet-csp/assets/js/app.131d7bee.js" as="script"><link rel="preload" href="/jfet-csp/assets/js/6.29efba1b.js" as="script"><link rel="prefetch" href="/jfet-csp/assets/js/2.d8f505d4.js"><link rel="prefetch" href="/jfet-csp/assets/js/3.2adf9a6a.js"><link rel="prefetch" href="/jfet-csp/assets/js/4.8479f750.js"><link rel="prefetch" href="/jfet-csp/assets/js/5.ba27b9b6.js"><link rel="prefetch" href="/jfet-csp/assets/js/7.d71211a0.js">
     <link rel="stylesheet" href="/jfet-csp/assets/css/0.styles.87c5a639.css">
   </head>
   <body>
@@ -43,7 +43,7 @@ source<span class="token punctuation">.</span><span class="token function">put</
 
 source<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> delayed<span class="token punctuation">.</span><span class="token function">take</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// </span>
+<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> delayed<span class="token punctuation">.</span><span class="token function">take</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// will receive 42 after 3 seconds</span>
 </code></pre></div><h3 id="filter"><a href="#filter" aria-hidden="true" class="header-anchor">#</a> filter</h3> <p><code>source.filter(value =&gt; boolean)</code> -&gt; <code>channel</code></p> <p>The <code>filter</code> method takes a <code>predicate</code> function and returns a new channel. Each value inserted into the <code>source</code> will be passed to the <code>predicate</code>, and only those who make the function to return <code>true</code> will be inserted into the returned <code>channel</code>. The others will be discarded.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@jfet/csp/dist/operators/filter&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// or...</span>
 <span class="token keyword">import</span> <span class="token string">&quot;@jfet/csp/dist/operators/filter&quot;</span><span class="token punctuation">;</span>
@@ -161,6 +161,6 @@ chan<span class="token punctuation">.</span><span class="token function">fromAsy
         <a href="/jfet-csp/guide/channels.html" class="prev">
           Channels
         </a></span> <!----></p></div> </div> <!----></div></div>
-    <script src="/jfet-csp/assets/js/app.062d9a23.js" defer></script><script src="/jfet-csp/assets/js/6.cd003ada.js" defer></script>
+    <script src="/jfet-csp/assets/js/app.131d7bee.js" defer></script><script src="/jfet-csp/assets/js/6.29efba1b.js" defer></script>
   </body>
 </html>
