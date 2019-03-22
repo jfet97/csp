@@ -1,10 +1,13 @@
 import { ChannelWrapper, ChannelWrapperImp } from '../ChannelWrapper';
 
-// take all the values from the sync iterable and put them into the input (this) channel
-// waiting that a value is taken from the channel before put the next one
-// useful for infinite iterables
+/**
+ * Take all the values from the sync iterable and put them into the channel on which this method was called,
+ * waiting that a value is taken from the channel before putting the next one.
+ * @param it an iterable
+ * @return the channel on which the method was called
+*/
 function fromIterableDelayed<T>(this: ChannelWrapper<T>, it: Iterable<T>): ChannelWrapper<T> {
-    
+
     (async () => {
         for (const msg of it) {
             await this.put(msg);

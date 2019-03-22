@@ -1,6 +1,10 @@
 import { Selectable } from './Selectable';
 import { Channel, racers } from './Channel';
 
+/**
+ * @param chs An array of Channels
+ * @returns A Promise that will fullfill with a message contained into the winner channel
+ */
 async function alts<T>(...chs: Channel<T>[]): Promise<T> {
     // transform each channel in a Promise that will fulfill when
     // the corrisponding channel receive a message
@@ -16,6 +20,10 @@ async function alts<T>(...chs: Channel<T>[]): Promise<T> {
     return msg;
 }
 
+/**
+ * @param chs A selectable.
+ * @returns A Promise that will fullfill with a message contained into the winner channel and its key.
+ */
 async function select<T>(selectable: Selectable<T>): Promise<[any, T]> {
 
     // transform each channel in a Promise that will fulfill when

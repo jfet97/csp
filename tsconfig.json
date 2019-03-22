@@ -18,5 +18,9 @@
   "include": [
     "src/**/*",
     "test/**/*"
-  ]
+  ],
+  "typedocOptions": {
+    "mode": "modules",
+    "out": "docs/.vuepress/dist/api"
+  }
 }

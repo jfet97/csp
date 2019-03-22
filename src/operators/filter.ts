@@ -1,5 +1,12 @@
 import { ChannelWrapper, ChannelWrapperImp } from '../ChannelWrapper';
 
+/**
+ * The filter method takes a predicate function and returns a new channel. Each value inserted into
+ * the channel on which this method was called will be passed to the predicate, and only those who make the function to return true
+ * will be inserted into the returned channel. The others will be discarded.
+ * @param predicateFn the predicate function
+ * @return a fresh new channel
+ */
 function filter<T>(this: ChannelWrapper<T>, predicateFn: (msg: T) => boolean): ChannelWrapper<T> {
     const outCh = new ChannelWrapperImp<T>();
 

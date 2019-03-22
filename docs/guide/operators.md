@@ -81,7 +81,7 @@ const result2 = await resCh.take(); // will receive 3
 
 `source.map(value => value)` -> `channel`
 
-The `map` method takes a `mapper` function and returns a new channel. Each value inserted into the `source` will be passed to the `mapper` function and the result of each computation will be inserted into the resulting `channel`.
+The `map` method takes a `mapper` function and returns a new channel. Each value inserted into the `source` will be passed to the `mapper` function and the result of each computation will be inserted into the returned `channel`.
 
 ```js
 require("@jfet97/csp/dist/operators/map");

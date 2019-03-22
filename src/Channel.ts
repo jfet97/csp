@@ -3,15 +3,68 @@ const putters = Symbol('putters');
 const takers = Symbol('takers');
 const racers = Symbol('racers');
 
+/**
+ * This interface represent a channel.
+ * It has 4 FIFO stacks plus some methods to operate with those sstacks.
+ */
 interface Channel<T> {
+    /**
+     * This stack will contain all the messages sended by the channel's users
+     */
     [messages]: T[];
+    /**
+     * This stack will contain all the 'resolve' functions of the putters.
+     * When a process put a value into the channel a Promise is returned.
+     * The 'resolve' function of that Promise ends here
+     */
     [putters]: (() => void)[];
+    /**
+     * This stack will contain all the 'resolve' functions of the takers.
+     * When a process take a value from the channel a Promise is returned.
+     * The 'resolve' function of that Promise ends here
+     */
     [takers]: ((msg: T) => void)[];
+    /**
+     * This stack will contain all the 'resolve' functions of the racers.
+     * When a process execute Channel.alts or Channel.select a Promise is returned.
+     * The 'resolve' function of that Promise ends here
+     */
     [racers]: ((ch: Channel<T>) => void)[];
+    /**
+     * This method allow us to use a channel as an async Iterable
+     */
     [Symbol.asyncIterator]: (() => AsyncIterableIterator<T>);
+    /**
+     * 
+     * If there is already a taker or a racer waiting a message, the returned promise will be immediately resolved
+     * 
+     * If both a taker and a racer were waiting a message the priority is given to the taker that will retrieve
+     * the message
+     * 
+     * @param msg A value that will be forwarded into the channel
+     * @returns A promise that will be fulfilled when someone takes the msg from the channel
+     */
     put(msg: T): Promise<void>;
+    /**
+    *
+    * If there is already a message ready to be taken, the returned promise will be immediately resolved and the message read
+    * 
+    * @returns A promise that will be fulfilled when someone put a message into the channel
+    */
     take(): Promise<T>;
+    /**
+     * If there are no messages to be taken, the returned array will be empty
+     *
+     * @returns A promise that will be fulfilled with an array containing all the messages present into a channel 
+     */
     drain(): Promise<T[]>;
+    /**
+     * Transform a Channel into a Promise that wraps the channel itself. The promise will be fulfilled
+     * immediately if here is already a message ready to be taken. Otherwise the promise will be fulfilled with the channel
+     * when a process do a put operation, but only if there was no a waiting taker
+     * 
+     * @returns A promise wrapping a Channel
+     */
     race(): Promise<Channel<T>>;
     prependMessage(msg: T): void;
     waitATakerOrARacer(resolve: () => void): void;
@@ -28,6 +81,9 @@ interface Channel<T> {
     fulfillTheRacer(racer: (ch: Channel<T>) => void): void;
 }
 
+/** 
+ *  See the [[Channel]] interface for more details.
+ */
 class ChannelImp<T> implements Channel<T> {
 
 
@@ -54,10 +110,6 @@ class ChannelImp<T> implements Channel<T> {
         return new Promise(resolve => {
             this.prependMessage(msg);
             this.waitATakerOrARacer(resolve);
-
-            // if both a taker and a racer were waiting a message
-            // the priority is given to the taker that will retrieve 
-            // the message
             if (this.isThereAlreadyAPendingTaker()) {
                 this.unwaitOldestPutter();
                 const msg = this.retrieveOldestMessage();
@@ -83,18 +135,19 @@ class ChannelImp<T> implements Channel<T> {
         });
     }
 
+    /**
+     * Some data streams inserted into a channel are asynchronous
+     * for example those coming from operators like fromAsyncIterable, fromAsyncIterableDelayed,
+     * pipe, and those coming from static utilities like merge and mergeDelayed.
+
+     * If values were inserted using above mentioned functions and, subsequently,
+     * the drain method is called, we have to see those values into the channel.
+
+     * The solution is to defer the drain method into a subsequent
+     * microtask with the lowest priority due to the setTimeout behaviour.
+     */
     public async drain(): Promise<T[]> {
-        
-        // some data streams inserted into a channel are asynchronous
-        // for example those coming from operators like fromAsyncIterable, fromAsyncIterableDelayed,
-        // pipe, and those coming from static utilities like merge and mergeDelayed
-        //
-        // if values were inserted using above mentioned functions and, subsequently,
-        // the drain method is called, we have to see those values into the channel
-        // 
-        // the solution is to defer the drain method into a subsequent
-        // microtask with the lowest priority due to the setTimeout behaviour
-        await new Promise(resolve => setTimeout(resolve, 0)); 
+        await new Promise(resolve => setTimeout(resolve, 0));
 
         const msgs = [];
         while (this.areThereMessages()) {
@@ -158,6 +211,9 @@ class ChannelImp<T> implements Channel<T> {
 }
 
 /* atomic private methods */
+/**
+ * Responsible of sending a value to a taker
+ */
 function forwardMessage<T>(taker: (msg: T) => void, msg: T): void {
     taker(msg);
 }

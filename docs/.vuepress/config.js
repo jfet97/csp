@@ -13,6 +13,10 @@ module.exports = {
                 link: '/guide/',
             },
             {
+                text: 'API',
+                link: 'https://jfet97.github.io/csp/api/',
+            },
+            {
                 text: 'GitHub',
                 link: 'https://github.com/jfet97/csp',
             }
