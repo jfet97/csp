@@ -83,7 +83,19 @@ class ChannelImp<T> implements Channel<T> {
         });
     }
 
-    public drain(): Promise<T[]> {
+    public async drain(): Promise<T[]> {
+        
+        // some data streams inserted into a channel are asynchronous
+        // for example those coming from operators like fromAsyncIterable, fromAsyncIterableDelayed,
+        // pipe, and those coming from static utilities like merge and mergeDelayed
+        //
+        // if values were inserted using above mentioned functions and, subsequently,
+        // the drain method is called, we have to see those values into the channel
+        // 
+        // the solution is to defer the drain method into a subsequent
+        // microtask with the lowest priority due to the setTimeout behaviour
+        await new Promise(resolve => setTimeout(resolve, 0)); 
+
         const msgs = [];
         while (this.areThereMessages()) {
             msgs.push(this.take());
