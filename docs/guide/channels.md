@@ -130,14 +130,6 @@ chan2.put(4);
 chan2.put(5);
 chan2.put(6);
 
-// now 'chan1' contains three values: 1, 2, 3
-// and 'chan2' contains three values: 4, 5, 6
-
-// the flow of values into 'resCh' is asyncronous
-// so we need to let it go
-// (chances are you won't need it in your everyday use)
-await new Promise(resolve => setTimeout(resolve, 0));
-
 // the 'merge' static method let all the values contained into the input channels to flow
 const result = await resCh.drain(); // will receive [1, 4, 2, 5, 3, 6]
 ```
@@ -161,14 +153,6 @@ chan1.put(3);
 chan2.put(4);
 chan2.put(5);
 chan2.put(6);
-
-// now 'chan1' contains three values: 1, 2, 3
-// and 'chan2' contains three values: 4, 5, 6
-
-// the flow of values into 'resCh' is asyncronous
-// so we need to let it go
-// (chances are you won't need it in your everyday use)
-await new Promise(resolve => setTimeout(resolve, 0));
 
 // the 'mergeDelayed' static method let only one value contained
 // into each input channels (if present) to flow

@@ -176,7 +176,7 @@ const result = await chan.drain(); // will receive [1]
 `channel.fromAsyncIterable(asyncIterable)` -> `channel`
 
 The `fromAsyncIterable` method takes each values from an asynchronous iterable and puts them into the `channel`.
-A take operation won't be waited, therefore as soon as a new value is available it will be inserted into the `channel`
+A take operation won't be waited, therefore as soon as a new value is available it will be inserted into the `channel`.
 
 ```js
 require("@jfet/csp/dist/operators/fromAsyncIterable");
@@ -192,10 +192,6 @@ const asyncIterable = {
 };
 
 chan.fromAsyncIterable(asyncIterable);
-
-// the iteration is async so we need to let it go
-// (chances are you won't need it in your everyday use)
-await new Promise(resolve => setTimeout(resolve, 0));
 
 const result = await chan.drain(); // will receive [1, 2, 3, 4, 5]
 ```
@@ -220,10 +216,6 @@ const asyncIterable = {
 };
 
 chan.fromAsyncIterableDelayed(asyncIterable);
-
-// the iteration is async so we need to let it go
-// (chances are you won't need it in your everyday use)
-await new Promise(resolve => setTimeout(resolve, 0));
 
 const result = await chan.drain(); // will receive [1]
 ```

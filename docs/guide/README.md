@@ -4,7 +4,20 @@ title: Introduction
 
 # Introduction
 
-This is a library for Communicating Sequential Processes in JavaScript, built on top of `async/await` and the asynchronous iterable interface.
+This is a library for CSP in JavaScript, built on top of `async/await` and the asynchronous iterable interface.
+
+## What is CSP?
+
+CSP stands for __Communicating Sequential Processes__, a model to coordinate concurrency that was described by Richard Hoare in a book of the same name from 1978. \
+CSP is based on two main primitives: __processes__ and __channels__.
+
+Due to the single-thread nature of JavaScript, the term process does not refer to an OS process. \
+It alludes to an entity in the code designed to fulfill a specific task, a piece of code that can complete a unit of work independently.
+
+ES2017 took to us  __async functions__, which correspond to the above description. Their execution can be paused thanks to the __await__ keyword, therefore this type of function can be run concurrently faking threads.
+
+CSP says that processes cannot share memory. What if they need to communicate with each other? \
+In such case [channels](/guide/channels.html) come into action!
 
 ## Installation
 
