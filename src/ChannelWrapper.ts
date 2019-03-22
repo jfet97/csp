@@ -86,7 +86,6 @@ class ChannelWrapperImp<T> implements ChannelWrapper<T>{
             for await (const msg of source) {
                 outCh.put(msg);
             }
-            return;
         }
 
         for (const ch of chs) {
@@ -106,7 +105,6 @@ class ChannelWrapperImp<T> implements ChannelWrapper<T>{
             for await (const msg of source) {
                 await outCh.put(msg);
             }
-            return;
         }
 
         for (const ch of chs) {
