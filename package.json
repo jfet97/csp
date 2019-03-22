@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -w -p tsconfig.build.json",
-    "test": "tape -r ts-node/register ./test/index.spec.ts",
+    "test": "jest --watchAll --coverage",
     "deploy": "gh-pages -d /docs/.vuepress/dist",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
@@ -26,13 +26,15 @@
   "author": "Andrea Simone Costa <andrysimo1997@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^24.0.11",
     "@types/tape": "^4.2.33",
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "@typescript-eslint/parser": "^1.5.0",
     "eslint": "^5.15.3",
     "eslint-plugin-import": "^2.16.0",
     "gh-pages": "^2.0.1",
-    "tape": "^4.10.1",
+    "jest": "^24.5.0",
+    "ts-jest": "^24.0.0",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.3333",
     "vuepress": "^0.14.10",
