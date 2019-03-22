@@ -8,6 +8,7 @@
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -w -p tsconfig.build.json",
     "test": "jest --watchAll --coverage",
+    "test:ci": "jest",
     "deploy": "gh-pages -d /docs/.vuepress/dist",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
