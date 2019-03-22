@@ -14,7 +14,7 @@ module.exports = {
             },
             {
                 text: 'GitHub',
-                link: 'https://github.com/@jfet97/csp',
+                link: 'https://github.com/jfet97/csp',
             }
         ],
         sidebar: [
