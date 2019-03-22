@@ -7,7 +7,7 @@
     <meta name="description" content="A js library for Communicating Sequential Processes">
     
     
-    <link rel="preload" href="/jfet-csp/assets/css/0.styles.87c5a639.css" as="style"><link rel="preload" href="/jfet-csp/assets/js/app.85c834f6.js" as="script"><link rel="preload" href="/jfet-csp/assets/js/5.ba27b9b6.js" as="script"><link rel="prefetch" href="/jfet-csp/assets/js/2.d8f505d4.js"><link rel="prefetch" href="/jfet-csp/assets/js/3.2adf9a6a.js"><link rel="prefetch" href="/jfet-csp/assets/js/4.7ef297f3.js"><link rel="prefetch" href="/jfet-csp/assets/js/6.29efba1b.js"><link rel="prefetch" href="/jfet-csp/assets/js/7.d71211a0.js">
+    <link rel="preload" href="/jfet-csp/assets/css/0.styles.87c5a639.css" as="style"><link rel="preload" href="/jfet-csp/assets/js/app.0f074cdf.js" as="script"><link rel="preload" href="/jfet-csp/assets/js/5.678da10b.js" as="script"><link rel="prefetch" href="/jfet-csp/assets/js/2.d8f505d4.js"><link rel="prefetch" href="/jfet-csp/assets/js/3.2adf9a6a.js"><link rel="prefetch" href="/jfet-csp/assets/js/4.727fc5db.js"><link rel="prefetch" href="/jfet-csp/assets/js/6.88098a66.js"><link rel="prefetch" href="/jfet-csp/assets/js/7.d71211a0.js">
     <link rel="stylesheet" href="/jfet-csp/assets/css/0.styles.87c5a639.css">
   </head>
   <body>
@@ -64,14 +64,6 @@ chan2<span class="token punctuation">.</span><span class="token function">put</s
 chan2<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 chan2<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// now 'chan1' contains three values: 1, 2, 3</span>
-<span class="token comment">// and 'chan2' contains three values: 4, 5, 6</span>
-
-<span class="token comment">// the flow of values into 'resCh' is asyncronous</span>
-<span class="token comment">// so we need to let it go</span>
-<span class="token comment">// (chances are you won't need it in your everyday use)</span>
-<span class="token keyword">await</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=&gt;</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 <span class="token comment">// the 'merge' static method let all the values contained into the input channels to flow</span>
 <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> resCh<span class="token punctuation">.</span><span class="token function">drain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// will receive [1, 4, 2, 5, 3, 6]</span>
 </code></pre></div><h3 id="mergedelayed"><a href="#mergedelayed" aria-hidden="true" class="header-anchor">#</a> mergeDelayed</h3> <p><code>Channel.mergeDelayed(...channels)</code> -&gt; <code>channel</code></p> <p>The <code>mergeDelayed</code> static method will merge together multiple <code>channels</code>, returning a new one that will receive each value inserted into one of its input <code>channels</code>.
@@ -87,14 +79,6 @@ chan2<span class="token punctuation">.</span><span class="token function">put</s
 chan2<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 chan2<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// now 'chan1' contains three values: 1, 2, 3</span>
-<span class="token comment">// and 'chan2' contains three values: 4, 5, 6</span>
-
-<span class="token comment">// the flow of values into 'resCh' is asyncronous</span>
-<span class="token comment">// so we need to let it go</span>
-<span class="token comment">// (chances are you won't need it in your everyday use)</span>
-<span class="token keyword">await</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=&gt;</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 <span class="token comment">// the 'mergeDelayed' static method let only one value contained</span>
 <span class="token comment">// into each input channels (if present) to flow</span>
 <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> resCh<span class="token punctuation">.</span><span class="token function">drain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// will receive [1, 4]</span>
@@ -107,6 +91,6 @@ chan2<span class="token punctuation">.</span><span class="token function">put</s
         </a>
         →
       </span></p></div> </div> <!----></div></div>
-    <script src="/jfet-csp/assets/js/app.85c834f6.js" defer></script><script src="/jfet-csp/assets/js/5.ba27b9b6.js" defer></script>
+    <script src="/jfet-csp/assets/js/app.0f074cdf.js" defer></script><script src="/jfet-csp/assets/js/5.678da10b.js" defer></script>
   </body>
 </html>

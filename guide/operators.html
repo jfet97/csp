@@ -7,7 +7,7 @@
     <meta name="description" content="A js library for Communicating Sequential Processes">
     
     
-    <link rel="preload" href="/jfet-csp/assets/css/0.styles.87c5a639.css" as="style"><link rel="preload" href="/jfet-csp/assets/js/app.85c834f6.js" as="script"><link rel="preload" href="/jfet-csp/assets/js/6.29efba1b.js" as="script"><link rel="prefetch" href="/jfet-csp/assets/js/2.d8f505d4.js"><link rel="prefetch" href="/jfet-csp/assets/js/3.2adf9a6a.js"><link rel="prefetch" href="/jfet-csp/assets/js/4.7ef297f3.js"><link rel="prefetch" href="/jfet-csp/assets/js/5.ba27b9b6.js"><link rel="prefetch" href="/jfet-csp/assets/js/7.d71211a0.js">
+    <link rel="preload" href="/jfet-csp/assets/css/0.styles.87c5a639.css" as="style"><link rel="preload" href="/jfet-csp/assets/js/app.0f074cdf.js" as="script"><link rel="preload" href="/jfet-csp/assets/js/6.88098a66.js" as="script"><link rel="prefetch" href="/jfet-csp/assets/js/2.d8f505d4.js"><link rel="prefetch" href="/jfet-csp/assets/js/3.2adf9a6a.js"><link rel="prefetch" href="/jfet-csp/assets/js/4.727fc5db.js"><link rel="prefetch" href="/jfet-csp/assets/js/5.678da10b.js"><link rel="prefetch" href="/jfet-csp/assets/js/7.d71211a0.js">
     <link rel="stylesheet" href="/jfet-csp/assets/css/0.styles.87c5a639.css">
   </head>
   <body>
@@ -118,7 +118,7 @@ chan<span class="token punctuation">.</span><span class="token function">fromIte
 
 <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> chan<span class="token punctuation">.</span><span class="token function">drain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// will receive [1]</span>
 </code></pre></div><h3 id="fromasynciterable"><a href="#fromasynciterable" aria-hidden="true" class="header-anchor">#</a> fromAsyncIterable</h3> <p><code>channel.fromAsyncIterable(asyncIterable)</code> -&gt; <code>channel</code></p> <p>The <code>fromAsyncIterable</code> method takes each values from an asynchronous iterable and puts them into the <code>channel</code>.
-A take operation won't be waited, therefore as soon as a new value is available it will be inserted into the <code>channel</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@jfet/csp/dist/operators/fromAsyncIterable&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+A take operation won't be waited, therefore as soon as a new value is available it will be inserted into the <code>channel</code>.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@jfet/csp/dist/operators/fromAsyncIterable&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// or...</span>
 <span class="token keyword">import</span> <span class="token string">&quot;@jfet/csp/dist/operators/fromAsyncIterable&quot;</span><span class="token punctuation">;</span>
 
@@ -131,10 +131,6 @@ A take operation won't be waited, therefore as soon as a new value is available 
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 chan<span class="token punctuation">.</span><span class="token function">fromAsyncIterable</span><span class="token punctuation">(</span>asyncIterable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// the iteration is async so we need to let it go</span>
-<span class="token comment">// (chances are you won't need it in your everyday use)</span>
-<span class="token keyword">await</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=&gt;</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> chan<span class="token punctuation">.</span><span class="token function">drain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// will receive [1, 2, 3, 4, 5]</span>
 </code></pre></div><h3 id="fromasynciterabledelayed"><a href="#fromasynciterabledelayed" aria-hidden="true" class="header-anchor">#</a> fromAsyncIterableDelayed</h3> <p><code>channel.fromAsyncIterableDelayed(asyncIterable)</code> -&gt; <code>channel</code></p> <p>The <code>fromAsyncIterableDelayed</code> method takes all the values from an asynchronous iterable and puts them into the <code>channel</code>, waiting that a value is taken from the <code>channel</code> before put the next one.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@jfet/csp/dist/operators/fromAsyncIterableDelayed&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -151,16 +147,12 @@ chan<span class="token punctuation">.</span><span class="token function">fromAsy
 
 chan<span class="token punctuation">.</span><span class="token function">fromAsyncIterableDelayed</span><span class="token punctuation">(</span>asyncIterable<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// the iteration is async so we need to let it go</span>
-<span class="token comment">// (chances are you won't need it in your everyday use)</span>
-<span class="token keyword">await</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=&gt;</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> chan<span class="token punctuation">.</span><span class="token function">drain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// will receive [1]</span>
 </code></pre></div></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
         ←
         <a href="/jfet-csp/guide/channels.html" class="prev">
           Channels
         </a></span> <!----></p></div> </div> <!----></div></div>
-    <script src="/jfet-csp/assets/js/app.85c834f6.js" defer></script><script src="/jfet-csp/assets/js/6.29efba1b.js" defer></script>
+    <script src="/jfet-csp/assets/js/app.0f074cdf.js" defer></script><script src="/jfet-csp/assets/js/6.88098a66.js" defer></script>
   </body>
 </html>
