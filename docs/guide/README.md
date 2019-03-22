@@ -60,7 +60,7 @@ waff.put(createBall());
 
 With the following result:
 
-![pingpong](/@jfet97-csp/assets/pingpong.gif)
+![pingpong](/csp/assets/pingpong.gif)
 
 ## Async Iteration Protocol
 

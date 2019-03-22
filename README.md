@@ -1,4 +1,4 @@
-# jcsp
+# @jfet97/csp
 
 A library for Communicating Sequential Processes, built on top of `async/await` and the asynchronous iterable interface.
 
@@ -14,7 +14,7 @@ $ npm install --save @jfet97/csp
 
 ## Docs
 
-You can find the documentation [here](https://jfet97.github.io/jfet97-csp/).
+You can find the documentation [here](https://jfet97.github.io/csp/).
 
 
 ## Example Usage

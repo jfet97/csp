@@ -1,7 +1,7 @@
 module.exports = {
     title: '@jfet97/csp',
     description: 'A js library for Communicating Sequential Processes',
-    base: '/@jfet97-csp/',
+    base: '/csp/',
     themeConfig: {
         nav: [
             {
