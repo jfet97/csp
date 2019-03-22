@@ -9,9 +9,10 @@
     "dev": "tsc -w -p tsconfig.build.json",
     "test": "jest --watchAll --coverage",
     "test:ci": "jest",
-    "deploy": "gh-pages -d /docs/.vuepress/dist",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "api:build": "typedoc",
+    "deploy": "gh-pages -d /docs/.vuepress/dist"
   },
   "files": [
     "dist"
@@ -37,8 +38,11 @@
     "jest": "^24.5.0",
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.3",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-nojekyll": "^1.0.1",
     "typescript": "^3.3.3333",
     "vuepress": "^0.14.10",
     "webpack-dev-middleware": "^3.6.0"
-  }
+  },
+  "dependencies": {}
 }

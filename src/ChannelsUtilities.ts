@@ -21,8 +21,8 @@ async function alts<T>(...chs: Channel<T>[]): Promise<T> {
 }
 
 /**
- * @param chs A selectable
- * @returns A Promise that will fullfill with a message contained into the winner channel and its key
+ * @param chs A selectable.
+ * @returns A Promise that will fullfill with a message contained into the winner channel and its key.
  */
 async function select<T>(selectable: Selectable<T>): Promise<[any, T]> {
 
