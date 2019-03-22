@@ -22,7 +22,7 @@ In such case [channels](/guide/channels.html) come into action!
 ## Installation
 
 ```sh
-$ npm install --save @jfet/csp
+$ npm install --save @jfet97/csp
 ```
 
 ## Example Usage
@@ -30,9 +30,9 @@ $ npm install --save @jfet/csp
 Below is a trivial example of usage, that plays on the standard ping-pong example.
 
 ```js
-const { Channel } = require('@jfet/csp');
+const { Channel } = require('@jfet97/csp');
 // or...
-import { Channel } from '@jfet/csp';
+import { Channel } from '@jfet97/csp';
 
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -60,7 +60,7 @@ waff.put(createBall());
 
 With the following result:
 
-![pingpong](/jfet-csp/assets/pingpong.gif)
+![pingpong](/@jfet97-csp/assets/pingpong.gif)
 
 ## Async Iteration Protocol
 

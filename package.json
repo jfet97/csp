@@ -1,6 +1,6 @@
 {
-  "name": "@jfet/csp",
-  "version": "1.0.8",
+  "name": "@jfet97/csp",
+  "version": "1.0.9",
   "description": "communicating sequential processes in javascript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

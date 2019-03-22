@@ -1,20 +1,20 @@
-# @jfet/csp
+# jcsp
 
 A library for Communicating Sequential Processes, built on top of `async/await` and the asynchronous iterable interface.
 
-[![npm version](https://badge.fury.io/js/%40jfet%2Fcsp.svg)](https://badge.fury.io/js/%40jfet%2Fcsp)
+[![npm version](https://badge.fury.io/js/%40jfet97%2Fcsp.svg)](https://badge.fury.io/js/%40jfet97%2Fcsp)
 
 ## Installation
 
 This library requires `async/await` and `for-await-of` support.
 
 ```
-$ npm install --save @jfet/csp
+$ npm install --save @jfet97/csp
 ```
 
 ## Docs
 
-You can find the documentation [here](https://jfet97.github.io/jfet-csp/).
+You can find the documentation [here](https://jfet97.github.io/jfet97-csp/).
 
 
 ## Example Usage
@@ -22,7 +22,7 @@ You can find the documentation [here](https://jfet97.github.io/jfet-csp/).
 Below is a trivial example of usage, that plays on the standard ping-pong example.
 
 ```javascript
-const { Channel } = require('@jfet/csp');
+const { Channel } = require('@jfet97/csp');
 
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 

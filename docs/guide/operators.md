@@ -13,9 +13,9 @@ These methods could be added to the instances created by the `Channel` construct
 The `broadcast` method enables multicasting from one `channel` to multiple `channels`. As soon as a value is inserted into the source, it will be emitted to listening channels.
 
 ```js
-require("@jfet/csp/dist/operators/broadcast");
+require("@jfet97/csp/dist/operators/broadcast");
 // or...
-import "@jfet/csp/dist/operators/broadcast";
+import "@jfet97/csp/dist/operators/broadcast";
 
 
 const source = new Channel();
@@ -40,9 +40,9 @@ const res3 = await dest1.take(); // will receive 42
 The `delay` method creates a new channel that will receive all the values coming from its `source`, but with a delay expressed in milliseconds.
 
 ```js
-require("@jfet/csp/dist/operators/delay");
+require("@jfet97/csp/dist/operators/delay");
 // or...
-import "@jfet/csp/dist/operators/delay";
+import "@jfet97/csp/dist/operators/delay";
 
 
 const source = new Channel();
@@ -60,9 +60,9 @@ const res = await delayed.take(); // will receive 42 after 3 seconds
 The `filter` method takes a `predicate` function and returns a new channel. Each value inserted into the `source` will be passed to the `predicate`, and only those who make the function to return `true` will be inserted into the returned `channel`. The others will be discarded.
 
 ```js
-require("@jfet/csp/dist/operators/filter");
+require("@jfet97/csp/dist/operators/filter");
 // or...
-import "@jfet/csp/dist/operators/filter";
+import "@jfet97/csp/dist/operators/filter";
 
 
 const source = new Channel();
@@ -84,9 +84,9 @@ const result2 = await resCh.take(); // will receive 3
 The `map` method takes a `mapper` function and returns a new channel. Each value inserted into the `source` will be passed to the `mapper` function and the result of each computation will be inserted into the resulting `channel`.
 
 ```js
-require("@jfet/csp/dist/operators/map");
+require("@jfet97/csp/dist/operators/map");
 // or...
-import "@jfet/csp/dist/operators/map";
+import "@jfet97/csp/dist/operators/map";
   
 
 const source = new Channel();
@@ -110,9 +110,9 @@ const result4 = await resCh.take(); // will receive 40
 The `pipe` method simply takes alle the values from the `source` and insert them into the `dest`. It returns the destination `channel` to allow chained operations on it.
 
 ```js
-require("@jfet/csp/dist/operators/pipe");
+require("@jfet97/csp/dist/operators/pipe");
 // or...
-import "@jfet/csp/dist/operators/pipe";
+import "@jfet97/csp/dist/operators/pipe";
   
 
 const source = new Channel();
@@ -138,9 +138,9 @@ The `fromIterable` method takes all the values from a synchronous iterable and p
 Do not use with endless iterables.
 
 ```js
-require("@jfet/csp/dist/operators/fromIterable");
+require("@jfet97/csp/dist/operators/fromIterable");
 // or...
-import "@jfet/csp/dist/operators/fromIterable";
+import "@jfet97/csp/dist/operators/fromIterable";
 
 
 const chan = new Channel();
@@ -158,9 +158,9 @@ const result = await chan.drain(); // will receive [1, 2, 3]
 The `fromIterableDelayed` method takes all the values from a synchronous iterable and puts them into the `channel`, waiting that a value is taken from the `channel` before put the next one.
 
 ```js
-require("@jfet/csp/dist/operators/fromIterableDelayed");
+require("@jfet97/csp/dist/operators/fromIterableDelayed");
 // or...
-import "@jfet/csp/dist/operators/fromIterableDelayed";
+import "@jfet97/csp/dist/operators/fromIterableDelayed";
 
 
 const chan = new Channel();
@@ -179,9 +179,9 @@ The `fromAsyncIterable` method takes each values from an asynchronous iterable a
 A take operation won't be waited, therefore as soon as a new value is available it will be inserted into the `channel`.
 
 ```js
-require("@jfet/csp/dist/operators/fromAsyncIterable");
+require("@jfet97/csp/dist/operators/fromAsyncIterable");
 // or...
-import "@jfet/csp/dist/operators/fromAsyncIterable";
+import "@jfet97/csp/dist/operators/fromAsyncIterable";
 
 
 const chan = new Channel();
@@ -203,9 +203,9 @@ const result = await chan.drain(); // will receive [1, 2, 3, 4, 5]
 The `fromAsyncIterableDelayed` method takes all the values from an asynchronous iterable and puts them into the `channel`, waiting that a value is taken from the `channel` before put the next one.
 
 ```js
-require("@jfet/csp/dist/operators/fromAsyncIterableDelayed");
+require("@jfet97/csp/dist/operators/fromAsyncIterableDelayed");
 // or...
-import "@jfet/csp/dist/operators/fromAsyncIterableDelayed";
+import "@jfet97/csp/dist/operators/fromAsyncIterableDelayed";
 
 
 const chan = new Channel();

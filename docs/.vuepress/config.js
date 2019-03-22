@@ -1,7 +1,7 @@
 module.exports = {
-    title: '@jfet/csp',
+    title: '@jfet97/csp',
     description: 'A js library for Communicating Sequential Processes',
-    base: '/jfet-csp/',
+    base: '/@jfet97-csp/',
     themeConfig: {
         nav: [
             {
@@ -14,7 +14,7 @@ module.exports = {
             },
             {
                 text: 'GitHub',
-                link: 'https://github.com/jfet97/jfet-csp',
+                link: 'https://github.com/@jfet97/csp',
             }
         ],
         sidebar: [
@@ -31,11 +31,4 @@ module.exports = {
         sidebarDepth: 2,
     }
 }
-
-// {
-//     '/guide/': [
-//         'introduction',
-//         'operators',
-//     ]
-// }
 
