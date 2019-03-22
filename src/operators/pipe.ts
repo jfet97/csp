@@ -1,7 +1,11 @@
 import { ChannelWrapper, ChannelWrapperImp } from '../ChannelWrapper';
 
-// Supplies to the out channel all the values taken from the source channel (this)
-// return the out channel to allow pipe chaining
+/** 
+ * Supplies to the out channel all the values taken from the channel on which this method was called
+ * return the out channel to allow pipe chaining
+ * @param outCh the destination channel
+ * @returns the destination channel
+*/ 
 function pipe<T>(this: ChannelWrapper<T>, outCh: ChannelWrapper<T>): ChannelWrapper<T> {
 
     (async () => {

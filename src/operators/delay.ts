@@ -2,6 +2,13 @@ import { ChannelWrapper, ChannelWrapperImp } from '../ChannelWrapper';
 
 const timeout = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
+/**
+ * The delay method creates a new channel that will receive all the values coming from its source,
+ * but with a delay expressed in milliseconds.
+ * @param ms amount of ms of delay
+ * @returns a fresh new channel that will receive all the value inserted into the channel on which this method was called,
+ * but delayed by a specific amount of time
+ */
 function delay<T>(this: ChannelWrapper<T>, ms: number): ChannelWrapper<T> {
     const outCh = new ChannelWrapperImp<T>();
 

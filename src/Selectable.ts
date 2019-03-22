@@ -1,19 +1,56 @@
 import { Channel } from './Channel';
 
+/**
+ * Interface for the Selectable Class.
+ * A selectable could be: a plain Object, a Map, a Set and an Array as well of channels.
+*/
 interface Selectable<T> {
+    /** A reference to the selectable object */
     sel: { [k: string]: Channel<T> } | Map<any, Channel<T>> | Set<Channel<T>> | Channel<T>[];
+    /** 
+     * A method that map each channel contained into the selectable into a Promise containg that channel .
+     * @param fn A proper mapper function.
+    */
     mapToPromise(fn: (c: Channel<T>) => Promise<Channel<T>>): SelectableP<T>;
+    /**
+     * Whatever the selectable is, this method convert it into an array of channels.
+     * Warning: Map and Object keys will be lost.
+     */
     revertToArray(): Channel<T>[];
     // map(fn: (c: Channel<T>) => Channel<T>): Selectable<T>;
+    /**
+     * A method that execute the filter operation. 
+     * @param predicate A proper predicate function .
+     */
     filter(predicate: (c: Channel<T>) => boolean): Selectable<T>;
+    /**
+     * A method that return the key of a specific channel.
+     * If the selectable is a Set, the channel itself will be returned.
+     * The not found channel status is not contemplated because this method is called only in a safe context.
+     * @param searchedCh A channel of which we are looking for the key.
+     */
     keyOf(searchedCh: Channel<T>): any;
 }
 
+/**
+ * Interface for the Selectable PClass.
+ * A selectableP could be: a plain Object, a Map, a Set and an Array as well of channels.
+ * Differently from the normal selectable, the channel is always wrapped into a Promise.
+*/
 interface SelectableP<T> {
+    /** A reference to the selectableP object*/
     sel: { [k: string]: Promise<Channel<T>> } | Map<any, Promise<Channel<T>>> | Set<Promise<Channel<T>>> | Promise<Channel<T>>[];
+    /**
+     * Whatever the selectable is, this method convert it into an array of Promise<channel>.
+     * Warning: Map and Object keys will be lost.
+     */
     revertToArray(): Promise<Channel<T>>[];
 }
 
+/**
+ * Implementation for the Selectable Class.
+ * See the [[Selectable]] interface for more details.
+*/
 class SelectableImp<T> implements Selectable<T> {
 
     public constructor(public sel: { [k: string]: Channel<T> } | Map<any, Channel<T>> | Set<Channel<T>> | Channel<T>[]) {
@@ -121,10 +158,12 @@ class SelectableImp<T> implements Selectable<T> {
         }
         return res;
     }
-
-
 }
 
+/**
+ * Implementation for the Selectable Class.
+ * See the [[SelectableP]] interface for more details.
+*/
 class SelectablePImp<T> implements SelectableP<T> {
     public constructor(public sel: { [k: string]: Promise<Channel<T>> } | Map<any, Promise<Channel<T>>> | Set<Promise<Channel<T>>> | Promise<Channel<T>>[]) { }
 

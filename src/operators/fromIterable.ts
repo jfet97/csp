@@ -1,6 +1,11 @@
 import { ChannelWrapper, ChannelWrapperImp } from '../ChannelWrapper';
 
-// take all the values from the sync iterable and put them immediately into the input (this) channel
+/**
+ * Take all the values from a sync iterable and put them immediately into the
+ * channel on which this method was called
+ * @param it an iterable
+ * @return the channel on which the method was called
+*/ 
 function fromIterable<T>(this: ChannelWrapper<T>, it: Iterable<T>): ChannelWrapper<T> {
     
     for(const msg of it) {
