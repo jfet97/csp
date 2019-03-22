@@ -12,7 +12,7 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "api:build": "typedoc",
-    "deploy": "gh-pages -d /docs/.vuepress/dist"
+    "deploy": "gh-pages -d /docs/.vuepress/dist -t"
   },
   "files": [
     "dist"
